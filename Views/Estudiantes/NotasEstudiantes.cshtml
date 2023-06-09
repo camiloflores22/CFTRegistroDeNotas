@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CFTRegistroDeNotas.Models.Nota>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Notas</h1>
+
+<p>
+    <a href="http://localhost:5185/Notas/Create" value="create" class="btn btn-primary">Añadir Nota</a></>
+</p>
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nota1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ponderacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asignaturas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            float promedio = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nota1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ponderacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AsignaturasId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstudiantesId)
+                </td>
+                <td>
+                    <a asp-action="Edit" class=" btn btn-light" asp-route-id="@item.Id">Actualizar</a> |
+                    <a asp-action="Details" class="btn btn-success" asp-route-id="@item.Id">Ver</a> |
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+                @{
+                    promedio = promedio + ((item.Nota1 * item.Ponderacion) / 100);
+                }
+            </tr>
+            
+        }
+    </tbody>
+    <h1>promedio= @promedio</h1>
+</table>

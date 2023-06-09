@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CFTRegistroDeNotas.Models.AsignaturasAsignada>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Asignaturas Asignadas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Añadir registro de estudiante y asignatura</a>
+</p>
+<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asignaturas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estudiantes)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asignaturas.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estudiantes.Id)
+            </td>
+            <td>
+                    <a asp-action="Edit" class=" btn btn-light" asp-route-id="@item.Id">Actualizar</a> |
+                    <a asp-action="Details" class="btn btn-success" asp-route-id="@item.Id">Ver</a> |
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
